@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,12 +66,21 @@ Route::get('greeting', function() {
 //     return 'test' . $name;
 // });
 
-Route::get('user/{name}', function($name) {
-    return 'Test';
-})->where('name', '[a-z]+');
-// Route::view('greeting', 'greeting');
+// Route::get('user/{name}', function($name) {
+//     return 'Test';
+// })->where('name', '[a-z]+');
+// // Route::view('greeting', 'greeting');
 
-Route::get('test', function() {
-    return view('admin.profile');
+// Route::get('test', function() {
+//     return view('admin.profile');
+// });
+
+Route::get('connection', function() {
+    try {
+        DB::connection()->getPdo();
+        return 'connected';
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
 });
 
